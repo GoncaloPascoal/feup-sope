@@ -11,3 +11,8 @@ infile.txt.
 c) The return value of main is 1.
 f) The contents of infile.txt are copied to outfile.txt
 
+7. b) The exit handlers are usually called in reverse order of their 
+registration (for example, if we register atexit1 and then atexit2, the 
+program will call atexit2 and then atexit1). If abort() is called in the 
+main function, the exit handlers will not run. If one of the exit handlers
+ends with an exit() call, the others will still run.
