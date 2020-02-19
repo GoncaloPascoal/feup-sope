@@ -3,3 +3,5 @@ find the main function in the source files.
 
 3. c) The return value of ls was 0.
  
+4. a) We can pass multiple word names using quotes, for example:
+./hello "John Smith"
