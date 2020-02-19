@@ -1,0 +1,1 @@
+Test file for p6a.c

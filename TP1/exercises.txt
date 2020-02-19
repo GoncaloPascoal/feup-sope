@@ -5,3 +5,9 @@ find the main function in the source files.
  
 4. a) We can pass multiple word names using quotes, for example:
 ./hello "John Smith"
+
+6. b) The program doesn't execute correctly because there is no file named
+infile.txt.
+c) The return value of main is 1.
+f) The contents of infile.txt are copied to outfile.txt
+
