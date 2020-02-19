@@ -1,0 +1,5 @@
+2. b) An error occurs: 'undefined reference to main'. The compiler couldn't
+find the main function in the source files.
+
+3. c) The return value of ls was 0.
+ 
