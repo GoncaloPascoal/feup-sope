@@ -1,3 +1,5 @@
+// QUESTION 1 - TP2
+// By Goncalo Pascoal (up201806332@fe.up.pt)
 
 #include <termios.h>
 #include <unistd.h>
