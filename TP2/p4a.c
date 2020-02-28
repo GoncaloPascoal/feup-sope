@@ -59,16 +59,21 @@ int main(int argc, char* argv[]) {
         char nameBuf[BUF_SIZE];
         char gradeBuf[BUF_SIZE];
 
-        char namePrompt[] = "Name: ";
-        char gradePrompt[] = "Grade: ";
+        const char initialPrompt[] = "Enter an empty line to exit.\n";
+        const char namePrompt[] = "Name: ";
+        const char gradePrompt[] = "Grade: ";
+
+        write(STDOUT_FILENO, initialPrompt, strlen(initialPrompt));
 
         while (true) {
+            write(STDOUT_FILENO, namePrompt, strlen(namePrompt));
             size_t nameLen = readToBuf(nameBuf, BUF_SIZE);
 
             if (nameLen == 0) {
                 break;
             }
 
+            write(STDOUT_FILENO, gradePrompt, strlen(gradePrompt));
             size_t gradeLen = readToBuf(gradeBuf, BUF_SIZE);
 
             if (gradeLen == 0) {
@@ -80,10 +85,17 @@ int main(int argc, char* argv[]) {
                 exit(2);
             }
 
+            {
+                int i = atoi(gradeBuf);
+                if (i < 0 || i > 20) {
+                    printf("Error: invalid grade (not in 0-20 range).\n");
+                    exit(2);
+                }
+            }
             
-            write(fileDesc, &namePrompt, nameLen);
+            write(fileDesc, nameBuf, nameLen);
             write(fileDesc, "\n", 1);
-            write(fileDesc, &gradePrompt, gradeLen);
+            write(fileDesc, gradeBuf, gradeLen);
             write(fileDesc, "\n", 1);
         }
 
@@ -91,7 +103,7 @@ int main(int argc, char* argv[]) {
     }
     else {
         char prompt[] = "Usage: p4a <file>\n";
-        write(STDOUT_FILENO, &prompt, strlen(prompt));
+        write(STDOUT_FILENO, prompt, strlen(prompt));
     }
 
     return 0;
