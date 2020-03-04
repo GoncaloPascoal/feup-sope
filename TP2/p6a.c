@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     }
 
     char* path;
-    
+
     while ((direntp = readdir(dirp)) != NULL) {
         path = (char*) malloc(sizeof(char) * (strlen(argv[1]) + strlen(direntp->d_name) + 2));
         sprintf(path, "%s%s%s", argv[1], "/", direntp->d_name);

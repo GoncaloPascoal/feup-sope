@@ -1,0 +1,9 @@
+6. a) The program prints the name of all files and directories in the chosen directory, similar to the ls command.
+ 
+c) The hard link has the same file size as the original file (10 bytes), and has the same i-node, while the symbolic link has a different i-node and size to the original file (8 bytes, enough to store the filename).
+
+d) stat() obtains information about the file the symbolic link temp2.txt refers to while lstat() obtains information about the symbolic link itself.
+
+e) After deleting temp.txt, the hard link remains and if we use cat, we will get the contents of the temp.txt file. Since we only deleted one of the references to the i-node, the data remains on the disk and can be accessed through temp1.txt. We cannot access temp2.txt (symbolic link) since it refers specifically to the temp.txt file.
+
+After deleting temp2.txt, temp1.txt can still be accessed.
