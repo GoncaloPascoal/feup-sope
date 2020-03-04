@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
     }
 
     char* path;
-
+    
     while ((direntp = readdir(dirp)) != NULL) {
         path = (char*) malloc(sizeof(char) * (strlen(argv[1]) + strlen(direntp->d_name) + 2));
         sprintf(path, "%s%s%s", argv[1], "/", direntp->d_name);
@@ -44,7 +44,7 @@ int main(int argc, char* argv[]) {
             str = "other";
         }
 
-        printf("%-25s - %s\n", direntp->d_name, str);
+        printf("%-25s - %-10s | %lu | %lu\n", direntp->d_name, str, direntp->d_ino, stat_buf.st_size);
     }
 
     closedir(dirp);
