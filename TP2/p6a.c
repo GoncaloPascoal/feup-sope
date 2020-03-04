@@ -22,11 +22,17 @@ int main(int argc, char* argv[]) {
         exit(2);
     }
 
+    char* path;
+
     while ((direntp = readdir(dirp)) != NULL) {
-        if (lstat(direntp->d_name, &stat_buf) != 0) {
+        path = (char*) malloc(sizeof(char) * (strlen(argv[1]) + strlen(direntp->d_name) + 2));
+        sprintf(path, "%s%s%s", argv[1], "/", direntp->d_name);
+
+        if (lstat(path, &stat_buf) != 0) {
             perror("lstat failed");
-            exit(3);
         }
+
+        free(path);
 
         if (S_ISREG(stat_buf.st_mode)) {
             str = "regular";
