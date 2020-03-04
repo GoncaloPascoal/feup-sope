@@ -1,0 +1,3 @@
+1. a) The parent process has the PPID 2510 (bash). The PPID of the child process is equal to the PID of the parent process. The block of code after the if statement is executed by the parent and the block of code after the else by the child (assuming no errors with the fork call occur).
+
+b) The PIDs of the parent and the child processes keep incrementing with each execution.
