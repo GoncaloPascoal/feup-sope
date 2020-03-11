@@ -3,12 +3,13 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 int main(int argc, char* argv[], char* envp[]) {
     pid_t pid;
 
-    if (argc != 2) {
-        printf("Usage: %s dirname\n", argv[0]);
+    if (argc != 2 && argc != 3) {
+        printf("Usage: %s dirname or %s dirname filename\n", argv[0], argv[0]);
         exit(1);
     }
 
@@ -18,7 +19,6 @@ int main(int argc, char* argv[], char* envp[]) {
         printf("My child is going to execute command \"ls -laR %s\"\n", argv[1]);
 
         int stat;
-        int microSeconds = 0;
 
         wait(&stat);
 
@@ -32,6 +32,19 @@ int main(int argc, char* argv[], char* envp[]) {
     }
     else if (pid == 0) {
         char* args[] = {"/bin/ls", "-laR", argv[1], NULL};
+
+        if (argc == 3) {
+            // Open destination file
+            int fileDes = open(argv[2], O_CREAT | O_WRONLY, 0644);
+
+            if (fileDes < 0) {
+                perror(argv[2]);
+                exit(2);
+            }
+
+            // Redirect standard output
+            dup2(fileDes, STDOUT_FILENO);
+        }
 
         execve("/bin/ls", args, envp);
         printf("Command not executed!\n");
