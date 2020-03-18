@@ -1,3 +1,14 @@
+# Ignore everything
+*
+
+# Unignore files with extensions
+!*.*
+
+# Unignore directories
+!*/
+
+### The combination above ignores all files without an extension ###
+
 # Object files
 *.o
 
