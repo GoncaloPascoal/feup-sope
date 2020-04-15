@@ -5,3 +5,5 @@
 **3. a)** Since the address of the variable t is passed, a thread may print their hello message after the value of t is altered, which leads to the observed output.  
 **b)** Allocate memory for a copy of the t variable and pass that to the thread instead.  
 **c)** If `exit` is used in the main function instead of `pthread_exit`, the hello message of the last thread isn't printed since the program finishes execution.
+
+**4.b)** If the main thread terminates execution with `exit` or `return`, the other threads will never print their ID since the program has terminated.
