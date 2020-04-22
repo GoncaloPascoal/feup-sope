@@ -1,0 +1,2 @@
+**1. a)** The program fills an array of integers with their corresponding indexes using parallel processing. A mutex is used to prevent synchronization problems.  
+**b)** Errors appear when we remove the `pthread_mutex_lock` and `pthread_mutex_unlock` calls because accessing and modifying the `buf` array is a critical section of the program.
