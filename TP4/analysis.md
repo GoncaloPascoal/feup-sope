@@ -6,3 +6,5 @@
 **c)** When we type CTRL-C in the shell, the SIGINT signal is sent to all processes in the active process group, so both the parent and its children terminate. When we send SIGINT to the parent process from another terminal window, only the parent will receive the signal and finish execution. The children will then become orphan processes until the init process becomes their parent.
 
 **5. b)** Since signals received while the program is inside the signal handler aren't processed, if multiple child processes exit at around the same time, only calling `wait` once might mean that some of them remain in a zombie state. It is therefore better to call `waitpid` with `WNOHANG` until there are no changes to the state of the child processes.
+
+**6.** The `SIGKILL` signal is used to terminate the process because it is impossible to install a handler for it, so we know for sure that the process will terminate when it is received.
