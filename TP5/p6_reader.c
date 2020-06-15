@@ -10,7 +10,7 @@ int main() {
     char str[100];
 
     mkfifo("/tmp/myfifo", 0660);
-    fd = open("/tmp/myfifo", O_WRONLY);
+    fd = open("/tmp/myfifo", O_RDONLY);
     while (readLine(fd, str)) printf("%s", str);
     close(fd);
 
