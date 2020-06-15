@@ -7,8 +7,14 @@
 #include "p7_shared.h"
 
 int main() {
-    if (mkfifo("/tmp/fifo_req", 0644) < 0 || mkfifo("/tmp/fifo_ans", 0644) < 0) {
+    if (mkfifo("/tmp/fifo_req", 0644) < 0) {
         perror("mkfifo");
+        exit(1);
+    }
+
+    if (mkfifo("/tmp/fifo_ans", 0644) < 0) {
+        perror("mkfifo");
+        unlink("/tmp/fifo_req");
         exit(1);
     }
 
@@ -20,8 +26,6 @@ int main() {
         unlink("/tmp/fifo_ans");
         exit(1);
     }
-
-    printf("opened fifo successfully\n");
 
     Request request;
     Result results[NUM_OPS];
@@ -56,5 +60,5 @@ int main() {
     unlink("/tmp/fifo_req");
     unlink("/tmp/fifo_ans");
 
-    return 0;
+    exit(0);
 }
